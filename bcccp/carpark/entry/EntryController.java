@@ -8,13 +8,7 @@ import bcccp.carpark.ICarparkObserver;
 import bcccp.carpark.IGate;
 import bcccp.tickets.adhoc.IAdhocTicket;
 
-public class EntryController implements ICarSensorResponder,
-
-public class EntryController 
-		implements ICarSensorResponder,
-
-				   ICarparkObserver,
-		           IEntryController {
+public class EntryController implements ICarSensorResponder, ICarparkObserver, IEntryController {
 	
 	private enum STATE { IDLE, WAITING, FULL, VALIDATED, ISSUED, TAKEN, ENTERING, ENTERED, BLOCKED } 
 	
@@ -102,11 +96,6 @@ public class EntryController
 			}
 			break;
 			
-
-		case WAITING: 
-		case FULL: 
-		case VALIDATED:
-        
 		case ISSUED: 
 			if (detectorId.equals(outsideEntrySensor_.getId()) && !carDetected) {
 				setState(STATE.IDLE);
