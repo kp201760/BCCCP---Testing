@@ -13,14 +13,33 @@ public class AdhocTicket implements IAdhocTicket {
 	private String barcode;
 	private STATE state_;
 	
+	AdhocTicket(int ticketNo_, String barcode, String carparkId_) throws Exception{
+		if(ticketNo_<=0)
+			 throw new Exception("invalid ticketNo")
+			this.ticketNo_=ticketNo_;
+		if(carparkId_ = 'null')
+			throw new Exception("invalid carparkId")
+			this.carparkId_ = carparkId_;
+		if(barcode = 'null')
+			throw new Exception("invalid barcode")
+			this.barcode = barcode;
+				
+	}
+	
 	private enum STATE { ISSUED, CURRENT, PAID, EXITED }
 
 	
 	
-	public AdhocTicket(String carparkId, int ticketNo, String barcode) {
-		this.carparkId_ = carparkId;
-		this.ticketNo_ = ticketNo;
-		this.barcode = barcode;
+	public AdhocTicket(String carparkId_, int ticketNo, String barcode)throws Exception{
+		if(ticketNo_<=0)
+			throw new Exception("invalid ticketNo")
+			this.ticketNo_=ticketNo_;
+		if(carparkId_ = 'null')
+			throw new Exception("invalid carparkId")
+			this.carparkId_ = carparkId_;
+		if(barcode = 'null')
+			throw new Exception("invalid barcode")
+			this.barcode = barcode;
 		this.state_ = STATE.ISSUED;		
 	}
 
