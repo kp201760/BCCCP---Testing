@@ -31,9 +31,9 @@ public class EntryController
 	
 	
 
-	public EntryController(Carpark carpark, IGate entryGate, 
-			ICarSensor os, 
-			ICarSensor is,
+	public EntryController(ICarpark carpark, IGate entryGate, 
+			ICarSensor outsideEntrySensor_, 
+			ICarSensor insideEntrySensor_,
 			IEntryUI ui) {
 		
 		this.carpark = carpark;
