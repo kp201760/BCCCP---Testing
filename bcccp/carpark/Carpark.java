@@ -12,7 +12,7 @@ public class Carpark implements ICarpark {
 	
 	private List<ICarparkObserver> observers;
 	private String carparkId;
-	private int capacity;
+	private int capacity=0;
 	private int nParked;
 	private IAdhocTicketDAO adhocTicketDAO;
 	private ISeasonTicketDAO seasonTicketDAO;
@@ -136,6 +136,7 @@ public class Carpark implements ICarpark {
 	@Override
 	public void recordAdhocTicketEntry() {
 		nParked++;
+		notifyObservers();
 		
 	}
 
