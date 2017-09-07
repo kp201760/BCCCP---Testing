@@ -74,7 +74,7 @@ public class PaystationController implements IPaystationController {
 				ui_.beep();
 				ui_.display("Take Rejected Ticket");
 				setState(STATE.REJECTED);
-				log("ticketInserted: Ticket is not current");				
+				log("ticketInserted: Ticket is not valid");				
 			}
 			}
 		else {
