@@ -67,9 +67,11 @@ public class AdhocTicket implements IAdhocTicket {
 
 	
 	@Override
-	public void enter(long entryDateTime) {
-		this.entryDateTime = entryDateTime;
-		this.state_ = STATE.CURRENT;		
+	public void enter(long entryDateTime) throws Exception {
+		if(entryDateTime <= 0)
+			throw new Exception("invalid dateTime")
+			this.entryDateTime = entryDateTime;
+		    this.state_ = STATE.CURRENT;		
 	}
 	
 	
@@ -99,7 +101,10 @@ public class AdhocTicket implements IAdhocTicket {
 
 	@Override
 	public float getCharge() {
-		return charge;
+		if(state_ = STATE.PAID)
+			return charge;
+		else
+			return 0;
 	}
 
 	
@@ -129,7 +134,10 @@ public class AdhocTicket implements IAdhocTicket {
 
 	@Override
 	public boolean isPaid() {
-		return state_ == STATE.PAID;
+		if(state_ == STATE.PAID)
+			return true;
+		else
+			return false;
 	}
 
 
