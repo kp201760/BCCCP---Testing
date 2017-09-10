@@ -151,9 +151,12 @@ public class Carpark implements ICarpark {
 	@Override
 	public boolean isSeasonTicketValid(String barcode) {		
 		ISeasonTicket ticket = seasonTicketDAO.findTicketById(barcode);
-		
-		// TODO implement full validation logic
-		return ticket != null;
+		if(ticket.inUse()==true && ticket.isExist()==true){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 
 	
