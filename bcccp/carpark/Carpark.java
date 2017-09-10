@@ -81,6 +81,7 @@ public class Carpark implements ICarpark {
 	
 	@Override
 	public IAdhocTicket issueAdhocTicket() {
+		if (isFull==true) throw new RuntimeException("issueAdhocTicket: Full ");
 		return adhocTicketDAO.createTicket(carparkId);
 	}
 	
@@ -94,8 +95,55 @@ public class Carpark implements ICarpark {
 		
 	@Override
 	public float calculateAddHocTicketCharge(long entryDateTime) {
-		//TODO Implement charge logic
-		return 3.0f;
+		float charge=0;
+		float OOH_Rate=2.0;
+		float BH_Rate=5.0;
+		long startTime = entryDateTime;  
+		String curDay = startTime.Day;
+		String endDay = endTime.Day;  
+		curStartTime = startTime;
+		while (curDay != endDay) {  
+			curEndTime = curDay.midnight;
+			charge += calcDayCharge(curStartTime, curEndTime, curDay);
+			curStartTime = curEndTime;
+			curDay = curDay.nextDay;
+		}			
+		charge += calcDayCharge(curStartTime, endTime, endDay);
+		return charge.(format, .3f);     
+		public float calcDayCharge(startTime, endTime, day){
+			float dayCharge = 0;
+			if isBusinessDay(day){ 
+			if (endTime <= startBH){
+				dayCharge = (endTime - startTime) * OOH_Rate ;
+			}
+			else if (startTime >= endBH) {
+				dayCharge = (endTime - startTime) * OOH_Rate;
+			}
+			else if (startTime >= startBH and endTime <= endBH){
+				dayCharge = (endTime - startTime) * BH_Rate;
+			}				
+			else if (startTime < startBH and endTime <= endBH){
+				dayCharge = (startBH - startTime) * OOH_Rate;
+				dayCharge += (endTime - startBH) * BH_Rate; 
+			}
+			else if (startTime >= startBH and startTime < endBH and endTime > endBH){
+				dayCharge = (endBH - startTime) * BH_Rate;
+				dayCharge += (endTime - endBH) * OOH_Rate ;
+			}				
+			else if (startTime < startBH and endTime > endBH){
+				dayCharge = (startBH - startTime) * OOH_Rate;
+				dayCharge += (endBH - startBH) * BH_Rate;
+				dayCharge += (endTime - endBH) * OOH_Rate;
+			}
+			else  { 
+				return "Error";
+			}
+			else{
+				dayCharge = (endTime - startTime) * OOH_Rate;
+			}
+			return dayCharge; 
+			}
+		}	
 	}
 
 	
