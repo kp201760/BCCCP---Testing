@@ -317,6 +317,8 @@ public class EntryController implements ICarSensorResponder, ICarparkObserver, I
 	public void ticketTaken() {
 		if (state_ == STATE.ISSUED || state_ == STATE.VALIDATED ) {
 			setState(STATE.TAKEN);
+			ui.display("Take Ticket");
+			entryGate_.isRaised();
 		}
 		else {
 			ui.beep();
