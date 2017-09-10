@@ -35,6 +35,7 @@ public class Carpark implements ICarpark {
 	public void register(ICarparkObserver observer) {
 		if (!observers.contains(observer)) {
 			observers.add(observer);
+			notifyObservers();
 		}
 	}
 
@@ -44,6 +45,7 @@ public class Carpark implements ICarpark {
 	public void deregister(ICarparkObserver observer) {
 		if (observers.contains(observer)) {
 			observers.remove(observer);
+			notifyObservers();
 		}
 	}
 	
@@ -66,7 +68,13 @@ public class Carpark implements ICarpark {
 	
 	@Override
 	public boolean isFull() {
-		return nParked + seasonTicketDAO.getNumberOfTickets() == capacity;
+		int status=nParked + seasonTicketDAO.getNumberOfTickets();
+		if(status==capacity){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 	
 	
