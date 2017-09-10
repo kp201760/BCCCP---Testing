@@ -82,6 +82,14 @@ public class ExitController
 			break;
 			
 		case WAITING: 
+			log("eventDetected: WAITING");
+			if (detectorId.equals(is.getId()) && carDetected) {
+				log("eventDetected: setting state to WAITING");
+				setState(STATE.WAITING);
+			}
+			break;
+			
+			
 		case PROCESSED: 
 			if (detectorId.equals(is.getId()) && !carDetected) {
 				setState(STATE.IDLE);
