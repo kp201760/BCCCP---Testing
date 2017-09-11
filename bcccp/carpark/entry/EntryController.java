@@ -322,6 +322,7 @@ public class EntryController
 	public void notifyCarparkEvent() {
 		if (state_ == STATE.FULL) {
 			if (!carpark.isFull()) {
+				System.out.println("push button");
 				setState(STATE.WAITING);
 			}
 		}
