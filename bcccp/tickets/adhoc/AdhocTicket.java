@@ -133,7 +133,10 @@ public class AdhocTicket implements IAdhocTicket {
 
 	@Override
 	public boolean isCurrent() {
-		return state_ == STATE.CURRENT;
+		if(state_ == STATE.CURRENT || state_ != STATE.EXITED)
+			return true;
+		else
+			return false;
 	}
 
 
