@@ -165,11 +165,11 @@ public class AdhocTicket implements IAdhocTicket {
 
 
 	@Override
-	public long getExitDateTime() {
-		if(state_ == STATE.PAID || state_ != STATE.EXITED)
+	public long getExitDateTime() throws Exception {
+		if(state_ == STATE.PAID || state_ ==STATE.CURRENT) 
+			throw Exception( first do payment)
 			return exitDateTime;
-		else 
-			return 0
+
 	}
 
 
