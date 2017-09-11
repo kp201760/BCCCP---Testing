@@ -94,7 +94,10 @@ public class AdhocTicket implements IAdhocTicket {
 	
 	@Override
 	public long getPaidDateTime() {
-		return paidDateTime;
+		if(state_ = STATE.PAID)
+			return paidDateTime;
+		else
+			return 0;
 	}
 
 
