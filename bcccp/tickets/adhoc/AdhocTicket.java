@@ -78,7 +78,10 @@ public class AdhocTicket implements IAdhocTicket {
 	
 	@Override
 	public long getEntryDateTime() {
-		return entryDateTime;
+		if(state_ = STATE.CURRENT)
+			return entryDateTime;
+		else
+			return 0;
 	}
 
 	
