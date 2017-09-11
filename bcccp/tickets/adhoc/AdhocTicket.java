@@ -147,7 +147,7 @@ public class AdhocTicket implements IAdhocTicket {
 		if(state_ == STATE.PAID)
 			return 0;
 		else
-			exitDateTime = dateTime;
+			this.exitDateTime = dateTime;
 			state_ = STATE.EXITED;
 			return exitDateTime;
 			
