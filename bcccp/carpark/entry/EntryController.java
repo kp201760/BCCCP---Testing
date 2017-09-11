@@ -281,6 +281,7 @@ public class EntryController
 				if (carpark.isSeasonTicketValid(barcode) &&
 					!carpark.isSeasonTicketInUse(barcode)) {
 					this.seasonTicketId = barcode;
+					System.out.println("Take Ticket");
 					setState(STATE.VALIDATED);
 				}
 				else {
@@ -307,6 +308,7 @@ public class EntryController
 	@Override
 	public void ticketTaken() {
 		if (state_ == STATE.ISSUED || state_ == STATE.VALIDATED ) {
+			System.out.println("Ticket Taken");
 			setState(STATE.TAKEN);
 		}
 		else {
