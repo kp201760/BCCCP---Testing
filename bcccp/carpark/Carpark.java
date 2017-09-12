@@ -22,7 +22,7 @@ public class Carpark implements ICarpark {
 	public Carpark(String name, int capacity, 
 			IAdhocTicketDAO adhocTicketDAO, 
 			ISeasonTicketDAO seasonTicketDAO) throws Exception {
-		if(carparkID='null'){
+		if(carparkID=null){
 			throw new Exception("Invalid Carpark ID");
 			this.carparkId = name;
 		}
@@ -97,7 +97,15 @@ public class Carpark implements ICarpark {
 	
 	@Override
 	public IAdhocTicket getAdhocTicket(String barcode) {
-		return adhocTicketDAO.findTicketByBarcode(barcode);
+		if(barcode==null) 
+		{
+			throw new RuntimeException("Invalid Barcode");
+		}
+		else
+		{	
+			if(adhocTicketDAO.findTicketByBarcode(barcode)==null)throw new RuntimeException("Invalid Ticket");
+			return adhocTicketDAO.findTicketByBarcode(barcode);
+		}
 	}
 	
 	
