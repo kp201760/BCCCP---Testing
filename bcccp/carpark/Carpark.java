@@ -213,9 +213,10 @@ public class Carpark implements ICarpark {
 
 	@Override
 	public void recordAdhocTicketEntry() {
+		if(capacity!=0){
 		nParked++;
 		notifyObservers();
-		
+		}
 	}
 
 
@@ -223,7 +224,9 @@ public class Carpark implements ICarpark {
 	@Override
 	public void recordAdhocTicketExit() {
 		nParked--;
-		notifyObservers();		
+		if(capacity!=0){
+		notifyObservers();	
+		}		
 	}
 
 
