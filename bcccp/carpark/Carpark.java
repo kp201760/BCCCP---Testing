@@ -21,9 +21,15 @@ public class Carpark implements ICarpark {
 	
 	public Carpark(String name, int capacity, 
 			IAdhocTicketDAO adhocTicketDAO, 
-			ISeasonTicketDAO seasonTicketDAO) {
-		this.carparkId = name;
-		this.capacity = capacity;
+			ISeasonTicketDAO seasonTicketDAO) throws Exception {
+		if(carparkID='null'){
+			throw new Exception("Invalid Carpark ID");
+			this.carparkId = name;
+		}
+		if(capacity<=0){
+			throw new Exception("Full");
+			this.capacity = capacity;
+		}
 		observers = new ArrayList<>();
 		this.adhocTicketDAO = adhocTicketDAO;
 		this.seasonTicketDAO = seasonTicketDAO;
