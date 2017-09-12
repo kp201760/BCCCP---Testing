@@ -202,9 +202,11 @@ public class Carpark implements ICarpark {
 	public void recordSeasonTicketEntry(String ticketId) {
 		ISeasonTicket ticket = seasonTicketDAO.findTicketById(ticketId);
 		if (ticket == null) throw new RuntimeException("recordSeasonTicketEntry: invalid ticketId - " + ticketId);
-		
-		seasonTicketDAO.recordTicketEntry(ticketId);
-		log(ticket.toString());
+		if(ticket.inUse())
+		{
+			seasonTicketDAO.recordTicketEntry(ticketId);
+			log(ticket.toString());
+		}
 	}
 
 	
@@ -238,7 +240,7 @@ public class Carpark implements ICarpark {
 	@Override
 	public void recordSeasonTicketExit(String ticketId) {
 		ISeasonTicket ticket = seasonTicketDAO.findTicketById(ticketId);
-		if (ticket == null) throw new RuntimeException("recordSeasonTicketExit: invalid ticketId - " + ticketId);
+		if (ticket == null && ticket.inUse()) throw new RuntimeException("recordSeasonTicketExit: invalid ticketId - " + ticketId);
 		
 		seasonTicketDAO.recordTicketExit(ticketId);
 		log(ticket.toString());
