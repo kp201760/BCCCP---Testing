@@ -34,12 +34,26 @@ public class ExitController
 			ICarSensor is,
 			ICarSensor os, 
 			IExitUI ui) {
-		
-		this.carpark = carpark;
-		this.exitGate = exitGate;
-		this.is = is;
-		this.os = os;
-		this.ui = ui;
+		if(carpark=null){
+			throw new Exception("Invalid Carpark");
+			this.carpark = carpark;
+		}
+		if(exitGate=null){
+			throw new Exception("Null value of exit gate ");
+			this.exitGate = exitGate;
+		}
+		if(is=null){
+			throw new Exception("Inside Sensor value: NULL ");
+			this.is = is;
+		}
+		if(os=null){
+			throw new Exception("Null value of outside sensor ");
+			this.os = os;
+		}
+		if(ui=null){
+			throw new Exception("Null value of user interface ");
+			this.ui = ui;
+		}
 		
 		os.registerResponder(this);
 		is.registerResponder(this);
