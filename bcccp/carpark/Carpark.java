@@ -12,7 +12,7 @@ public class Carpark implements ICarpark {
 	
 	private List<ICarparkObserver> observers;
 	private String carparkId;
-	private int capacity=0;
+	private int capacity;
 	private int nParked;
 	private IAdhocTicketDAO adhocTicketDAO;
 	private ISeasonTicketDAO seasonTicketDAO;
@@ -32,7 +32,10 @@ public class Carpark implements ICarpark {
 		}
 		observers = new ArrayList<>();
 		this.adhocTicketDAO = adhocTicketDAO;
-		this.seasonTicketDAO = seasonTicketDAO;
+		if(getNumberOfTickets()-10/100*getNumberOfTickets()<=0) throws Exception {
+			throw new Exception("Space is not available");
+			this.seasonTicketDAO = seasonTicketDAO;
+		}
 	}
 
 	
