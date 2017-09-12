@@ -250,10 +250,10 @@ public class Carpark implements ICarpark {
 	public boolean isSeasonTicketInUse(String ticketId) {
 		ISeasonTicket ticket = seasonTicketDAO.findTicketById(ticketId);
 		if (ticket == null) throw new RuntimeException("recordSeasonTicketExit: invalid ticketId - " + ticketId);
-		if(inUse(ticket) && isExist(ticket))
+		if(isExist(ticket) && ticket.inUse())
 		{
 			return true;
-		}else
+		} else
 		{ 
 			return false;
 		}
