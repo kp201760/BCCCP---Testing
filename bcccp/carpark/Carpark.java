@@ -243,8 +243,16 @@ public class Carpark implements ICarpark {
 	public boolean isSeasonTicketInUse(String ticketId) {
 		ISeasonTicket ticket = seasonTicketDAO.findTicketById(ticketId);
 		if (ticket == null) throw new RuntimeException("recordSeasonTicketExit: invalid ticketId - " + ticketId);
-		
-		return ticket.inUse();
+		long statrtTime= ticket.getStartValidPeriod(ticketID);
+		long endTime= ticket.getEndValidPeriod(ticketID);
+		if(startTime>=7 && endTime<=19)
+		{
+			return true;
+		}else
+		{ 
+			return false;
+		}
+			
 	}
 
 
