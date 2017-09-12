@@ -119,14 +119,6 @@ public class Carpark implements ICarpark {
 		String curDay = startTime.Day;
 		String endDay = endTime.Day;  
 		curStartTime = startTime;
-		while (curDay != endDay) {  
-			curEndTime = curDay.midnight;
-			charge += calcDayCharge(curStartTime, curEndTime, curDay);
-			curStartTime = curEndTime;
-			curDay = curDay.nextDay;
-		}			
-		charge += calcDayCharge(curStartTime, endTime, endDay);
-		return charge.(format, .3f);     
 		public float calcDayCharge(startTime, endTime, day){
 			float dayCharge = 0;
 			if isBusinessDay(day){ 
@@ -160,7 +152,16 @@ public class Carpark implements ICarpark {
 			}
 			return dayCharge; 
 			}
-		}	
+		}
+		while (curDay != endDay) {  
+			curEndTime = curDay.midnight;
+			charge += calcDayCharge(curStartTime, curEndTime, curDay);
+			curStartTime = curEndTime;
+			curDay = curDay.nextDay;
+		}			
+		charge += calcDayCharge(curStartTime, endTime, endDay);
+		return charge.(format, .3f);     
+			
 	}
 
 	
