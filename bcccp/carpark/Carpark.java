@@ -169,10 +169,14 @@ public class Carpark implements ICarpark {
 	@Override
 	public boolean isSeasonTicketValid(String barcode) {		
 		ISeasonTicket ticket = seasonTicketDAO.findTicketById(barcode);
-		if(ticket.inUse()==true && ticket.isExist()==true){
+		if (ticket == null) throw new RuntimeException("recordSeasonTicketExit: invalid ticketId - " + ticketId);
+		long statrtTime= ticket.getStartValidPeriod(ticketID);
+		long endTime= ticket.getEndValidPeriod(ticketID);
+		if(startTime>=7 && endTime<=19)
+		{
 			return true;
-		}
-		else{
+		}else
+		{ 
 			return false;
 		}
 	}
@@ -246,9 +250,7 @@ public class Carpark implements ICarpark {
 	public boolean isSeasonTicketInUse(String ticketId) {
 		ISeasonTicket ticket = seasonTicketDAO.findTicketById(ticketId);
 		if (ticket == null) throw new RuntimeException("recordSeasonTicketExit: invalid ticketId - " + ticketId);
-		long statrtTime= ticket.getStartValidPeriod(ticketID);
-		long endTime= ticket.getEndValidPeriod(ticketID);
-		if(startTime>=7 && endTime<=19)
+		if(inUse(ticket) && isExist(ticket))
 		{
 			return true;
 		}else
