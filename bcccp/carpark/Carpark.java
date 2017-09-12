@@ -181,6 +181,7 @@ public class Carpark implements ICarpark {
 	
 	@Override
 	public void registerSeasonTicket(ISeasonTicket seasonTicket) {
+		if(seasonTicket!=getName(seasonTicket)) throw new RuntimeException("Invalid Carpark ID"); 
 		seasonTicketDAO.registerTicket(seasonTicket);		
 	}
 
