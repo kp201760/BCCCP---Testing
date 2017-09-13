@@ -86,6 +86,7 @@ public class ExitController
 			
 		case IDLE: 
 			log("eventDetected: IDLE");
+			ui.display("Insert ticket");
 			if (detectorId.equals(is.getId()) && carDetected) {
 				log("eventDetected: setting state to WAITING");
 				setState(STATE.WAITING);
