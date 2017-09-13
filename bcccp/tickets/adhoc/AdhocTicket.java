@@ -17,10 +17,10 @@ public class AdhocTicket implements IAdhocTicket {
 		if(ticketNo_<=0)
 			 throw new Exception("invalid ticketNo")
 			this.ticketNo_=ticketNo_;
-		if(carparkId_ = 'null')
+		if(carparkId_ == null)
 			throw new Exception("invalid carparkId")
 			this.carparkId_ = carparkId_;
-		if(barcode = 'null')
+		if(barcode== null)
 			throw new Exception("invalid barcode")
 			this.barcode = barcode;
 				
@@ -34,10 +34,10 @@ public class AdhocTicket implements IAdhocTicket {
 		if(ticketNo_<=0)
 			throw new Exception("invalid ticketNo")
 			this.ticketNo_=ticketNo_;
-		if(carparkId_ = 'null')
+		if(carparkId_ == null)
 			throw new Exception("invalid carparkId")
 			this.carparkId_ = carparkId_;
-		if(barcode = 'null')
+		if(barcode == null)
 			throw new Exception("invalid barcode")
 			this.barcode = barcode;
 		this.state_ = STATE.ISSUED;		
