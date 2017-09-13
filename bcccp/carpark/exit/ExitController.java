@@ -86,7 +86,8 @@ public class ExitController
 			
 		case IDLE: 
 			log("eventDetected: IDLE");
-			ui.display("Insert ticket");
+			String message="Insert Ticket";
+			ui.display(message);
 			if (detectorId.equals(is.getId()) && carDetected) {
 				log("eventDetected: setting state to WAITING");
 				setState(STATE.WAITING);
@@ -275,7 +276,7 @@ public class ExitController
 			if (isAdhocTicket(ticketStr)) {
 				adhocTicket = carpark.getAdhocTicket(ticketStr);
 				exitTime = System.currentTimeMillis();
-				if (adhocTicket != null && adhocTicket.isPaid()) {
+				if (adhocTicket != null && adhocTicket.isPaid() && adhocTicket.charAt(0)==A {
 					setState(STATE.PROCESSED);
 				}
 				else {
@@ -290,6 +291,8 @@ public class ExitController
 			}
 			else {
 				ui.beep();
+				String message="Take you rejected ticket";
+				ui.display(message);
 				setState(STATE.REJECTED);						
 			}
 		}
