@@ -32,7 +32,7 @@ public class Carpark implements ICarpark {
 		}
 		observers = new ArrayList<>();
 		this.adhocTicketDAO = adhocTicketDAO;
-		if(getNumberOfTickets()-10/100*getNumberOfTickets()<=0) throws Exception {
+		if(seasonTicketDAO.getNumberOfTickets()-10/100* seasonTicketDAO.getNumberOfTickets()<=0) throws Exception {
 			throw new Exception("Space is not available");
 			this.seasonTicketDAO = seasonTicketDAO;
 		}
@@ -115,10 +115,10 @@ public class Carpark implements ICarpark {
 		float charge=0;
 		float OOH_Rate=2.0;
 		float BH_Rate=5.0;
-		long startTime = entryDateTime;  
+		long startTime = ISeasonTicket.getStartValidPeriod();  
 		String curDay = startTime.Day;
 		String endDay = endTime.Day;  
-		curStartTime = startTime;
+		curStartTime = ISeasonTicket.getEndValidPeriod();
 		public float calcDayCharge(startTime, endTime, day){
 			float dayCharge = 0;
 			if isBusinessDay(day){ 
@@ -170,8 +170,8 @@ public class Carpark implements ICarpark {
 	public boolean isSeasonTicketValid(String barcode) {		
 		ISeasonTicket ticket = seasonTicketDAO.findTicketById(barcode);
 		if (ticket == null) throw new RuntimeException("recordSeasonTicketExit: invalid ticketId - " + ticketId);
-		long statrtTime= ticket.getStartValidPeriod(ticketID);
-		long endTime= ticket.getEndValidPeriod(ticketID);
+		long statrtTime= ISeasonTicket.getStartValidPeriod(ticketID);
+		long endTime= ISeasonTicket.getEndValidPeriod(ticketID);
 		if(startTime>=7 && endTime<=19)
 		{
 			return true;
@@ -202,7 +202,7 @@ public class Carpark implements ICarpark {
 	public void recordSeasonTicketEntry(String ticketId) {
 		ISeasonTicket ticket = seasonTicketDAO.findTicketById(ticketId);
 		if (ticket == null) throw new RuntimeException("recordSeasonTicketEntry: invalid ticketId - " + ticketId);
-		if(ticket.inUse()==true)
+		if(ISeasonTicket.inUse()==true)
 		{
 			seasonTicketDAO.recordTicketEntry(ticketId);
 			log(ticket.toString());
@@ -240,7 +240,7 @@ public class Carpark implements ICarpark {
 	@Override
 	public void recordSeasonTicketExit(String ticketId) {
 		ISeasonTicket ticket = seasonTicketDAO.findTicketById(ticketId);
-		if (ticket == null && ticket.inUse()==true) throw new RuntimeException("recordSeasonTicketExit: invalid ticketId - " + ticketId);
+		if (ticket == null && ISeasonTicket.inUse()==true) throw new RuntimeException("recordSeasonTicketExit: invalid ticketId - " + ticketId);
 		
 		seasonTicketDAO.recordTicketExit(ticketId);
 		log(ticket.toString());
@@ -252,7 +252,7 @@ public class Carpark implements ICarpark {
 	public boolean isSeasonTicketInUse(String ticketId) {
 		ISeasonTicket ticket = seasonTicketDAO.findTicketById(ticketId);
 		if (ticket == null) throw new RuntimeException("recordSeasonTicketExit: invalid ticketId - " + ticketId);
-		if(isExist(ticket)==true && ticket.inUse()==true)
+		if(isExist(ticket)==true && ISeasonTicket.inUse()==true)
 		{
 			return true;
 		} else
