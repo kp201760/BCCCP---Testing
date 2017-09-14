@@ -47,6 +47,7 @@ public class AdhocTicket implements IAdhocTicket {
 	
 	@Override
 	public String getBarcode() {
+		String barcode == "A" + Integer.toHexString(ticketNo) + Integer.toHexString(entryDateTime);
 		return barcode;
 	}
 
