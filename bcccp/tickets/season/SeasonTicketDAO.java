@@ -32,7 +32,8 @@ public class SeasonTicketDAO implements ISeasonTicketDAO {
 	
 	
 	@Override
-	public void deregisterTicket(ISeasonTicket ticket) {
+	public void deregisterTicket(ISeasonTicket ticket) throws Exception{
+		if (ticket == null) throw new RuntimeException("Ticket is null");
 		if (currentTickets.containsKey(ticket.getId())) {
 			currentTickets.remove(ticket.getId());
 		}
