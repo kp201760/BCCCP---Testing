@@ -70,9 +70,13 @@ public class SeasonTicketDAO implements ISeasonTicketDAO {
 
 
 	@Override
-	public void recordTicketExit(String ticketId) {
+	public void recordTicketExit(String ticketId) throws Exception{
+		
 		ISeasonTicket ticket = findTicketById(ticketId);
 		if (ticket == null) throw new RuntimeException("finaliseTicketUsage : no such ticket: " + ticketId);
+
+		IUsageRecord usage = factory.make(ticketId, datetime);
+		if (usage == null) throw new RuntimeException(" ticketId is not currently in use.");
 
 		long dateTime = System.currentTimeMillis();
 		ticket.endUsage(dateTime);
