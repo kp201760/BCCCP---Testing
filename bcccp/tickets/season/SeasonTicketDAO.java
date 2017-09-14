@@ -22,7 +22,8 @@ public class SeasonTicketDAO implements ISeasonTicketDAO {
 	
 	
 	@Override
-	public void registerTicket(ISeasonTicket ticket) {
+	public void registerTicket(ISeasonTicket ticket) throws Exception{
+		if (ticket == null) throw new RuntimeException("Ticket is null");
 		if (!currentTickets.containsKey(ticket.getId())) {
 			currentTickets.put(ticket.getId(),ticket);
 		}
