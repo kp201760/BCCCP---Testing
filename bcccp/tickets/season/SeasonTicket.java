@@ -14,13 +14,19 @@ public class SeasonTicket implements ISeasonTicket {
 	private long startValidPeriod;
 	private long endValidPeriod;
 	
-	public SeasonTicket (String ticketId, String carparkId, 
-			             long startValidPeriod,
-			             long endValidPeriod) {
-		this.ticketId = ticketId;
-		this.carparkId =carparkId;
-		this.startValidPeriod = startValidPeriod;
-		this.endValidPeriod = endValidPeriod;
+	public SeasonTicket (String ticketId, String carparkId, long startValidPeriod, long endValidPeriod) throws Exception{
+		if(ticketId==null)
+			throw new Exception("invalid ticketId")
+			this.ticketId=ticketId;
+		if(carparkId == null)
+			throw new Exception("invalid carparkId")
+			this.carparkId = carparkId;
+		if(startValidPeriod<= 0)
+			throw new Exception("invalid Start Date")
+			this.startValidPeriod = startValidPeriod;
+		if(endValidPeriod<= startValidPeriod)
+			throw new Exception("invalid End Date")
+			this.endValidPeriod = endValidPeriod;
 		
 		usages = new ArrayList<IUsageRecord>();
 	}
