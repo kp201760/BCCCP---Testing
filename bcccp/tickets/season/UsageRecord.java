@@ -12,7 +12,10 @@ public class UsageRecord implements IUsageRecord {
 		if(ticketId==null || ticketId=="")
 			throw Exception("invalid ticket id")
 			this.ticketId = ticketId;
-		this.startDateTime = startDateTime;
+			
+		if(startDateTime <= 0)
+			throw Exception("invalid time")
+		    this.startDateTime = startDateTime;
 	}
 	
 	
