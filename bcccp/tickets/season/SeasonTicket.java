@@ -70,10 +70,12 @@ public class SeasonTicket implements ISeasonTicket {
 
 
 	@Override
-	public void recordUsage(IUsageRecord record) {
+	public void recordUsage(IUsageRecord record) throws Exception{
 		currentUsage = record;
-		if (!usages.contains(record) ) {
-			usages.add(record);
+		if(currentUsage==null)
+			throw new Exception("invalid user record")
+		if (!usages.contains(currentUsage) ) {
+			usages.add(currentUsage);
 		}
 		
 	}
@@ -81,23 +83,37 @@ public class SeasonTicket implements ISeasonTicket {
 
 	@Override
 	public IUsageRecord getCurrentUsageRecord() {
-		return currentUsage;
+		
+		if(currentUsage!=null)
+		{
+			return currentUsage;
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 
 	@Override
 	public List<IUsageRecord> getUsageRecords() {
-		return Collections.unmodifiableList(usages);
+		if(usages!=null)
+		{
+			return Collections.unmodifiableList(usages);
+		}
+		else
+		{
+			return Collections.unmodifiableList();
+		}
 	}
 
 
 	@Override
 	public void endUsage(long dateTime) {
-		if (currentUsage == null) throw new RuntimeException("SeasonTicket.endUsage : ticket is not in use");
-		
 		currentUsage.finalise(dateTime);
-		currentUsage = null;
-		
+		if (currentUsage == null) throw new RuntimeException("SeasonTicket.endUsage : ticket is not in use");
+		if(dateTime<= startValidPeriod)
+			throw new RuntimeException("invalid End Date");		
 	}
 
 
