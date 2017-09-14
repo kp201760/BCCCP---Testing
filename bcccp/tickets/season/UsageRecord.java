@@ -20,8 +20,10 @@ public class UsageRecord implements IUsageRecord {
 	
 	
 	
-	public void finalise(long endDateTime) {
-		this.endDateTime = endDateTime;
+	public void finalise(long endDateTime) throws Exception {
+		if(endDateTime<=0)
+			throw Exception("invalid end time")
+		    this.endDateTime = endDateTime;
 	}
 	
 	
