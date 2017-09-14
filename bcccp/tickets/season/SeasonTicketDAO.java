@@ -13,7 +13,8 @@ public class SeasonTicketDAO implements ISeasonTicketDAO {
 
 	
 	
-	public SeasonTicketDAO(IUsageRecordFactory factory) {
+	public SeasonTicketDAO(IUsageRecordFactory factory) throws Exception{
+		if (factory == null) throw new RuntimeException("UsageRecordFactory is null");
 		this.factory = factory;
 		currentTickets = new HashMap<>();		
 	}
