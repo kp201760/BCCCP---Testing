@@ -31,9 +31,9 @@ public class EntryController
 	
 	
 
-	public EntryController(ICarpark carpark, IGate entryGate, 
-			ICarSensor outsideEntrySensor_, 
-			ICarSensor insideEntrySensor_,
+	public EntryController(Carpark carpark, IGate entryGate, 
+			ICarSensor os, 
+			ICarSensor is,
 			IEntryUI ui) {
 		
 		this.carpark = carpark;
@@ -249,7 +249,7 @@ public class EntryController
 		if (state_ == STATE.WAITING) {
 			if (!carpark.isFull()) {
 				adhocTicket = carpark.issueAdhocTicket();
-				System.out.println("Take Ticket");
+				
 				String carparkId = adhocTicket.getCarparkId();
 				int ticketNo = adhocTicket.getTicketNo();
 				entryTime = System.currentTimeMillis();
@@ -260,8 +260,6 @@ public class EntryController
 				setState(STATE.ISSUED);
 			}
 			else {
-				
-				System.out.println("Carpark full");
 				setState(STATE.FULL);
 			}
 		}
@@ -281,7 +279,6 @@ public class EntryController
 				if (carpark.isSeasonTicketValid(barcode) &&
 					!carpark.isSeasonTicketInUse(barcode)) {
 					this.seasonTicketId = barcode;
-					System.out.println("Take Ticket");
 					setState(STATE.VALIDATED);
 				}
 				else {
@@ -308,7 +305,6 @@ public class EntryController
 	@Override
 	public void ticketTaken() {
 		if (state_ == STATE.ISSUED || state_ == STATE.VALIDATED ) {
-			System.out.println("Ticket Taken");
 			setState(STATE.TAKEN);
 		}
 		else {
@@ -324,7 +320,6 @@ public class EntryController
 	public void notifyCarparkEvent() {
 		if (state_ == STATE.FULL) {
 			if (!carpark.isFull()) {
-				System.out.println("push button");
 				setState(STATE.WAITING);
 			}
 		}
