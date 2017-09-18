@@ -8,15 +8,32 @@ public class UsageRecord implements IUsageRecord {
 	
 	
 	
+
+	public UsageRecord(String ticketId, long startDateTime) throws Exception{
+		if(ticketId==null || ticketId=="")
+			throw Exception("invalid ticket id")
+			this.ticketId = ticketId;
+			
+		if(startDateTime <= 0)
+			throw Exception("invalid time")
+		    this.startDateTime = startDateTime;
+
 	public UsageRecord(String ticketId, long startDateTime) {
 		this.ticketId = ticketId;
 		this.startDateTime = startDateTime;
+
 	}
 	
 	
-	
+
+	public void finalise(long endDateTime) throws Exception {
+		if(endDateTime<=0)
+			throw Exception("invalid end time")
+		    this.endDateTime = endDateTime;
+
 	public void finalise(long endDateTime) {
 		this.endDateTime = endDateTime;
+
 	}
 	
 	
@@ -26,11 +43,25 @@ public class UsageRecord implements IUsageRecord {
 		return startDateTime;
 	}
 
+	
+	public long setEndTime(long endDateTime){
+		this.endDateTime = endDateTime;
+		
+	}
+
+
 
 
 	@Override
 	public long getEndTime() {
+
+		if(endDateTime == this.setEndTime)
+			return endDateTime;
+		else 
+			return 0;
+
 		return endDateTime;
+
 	}
 
 
