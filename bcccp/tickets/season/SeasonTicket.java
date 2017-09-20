@@ -16,16 +16,16 @@ public class SeasonTicket implements ISeasonTicket {
 	
 	public SeasonTicket (String ticketId, String carparkId, long startValidPeriod, long endValidPeriod) throws Exception{
 		if(ticketId==null)
-			throw new Exception("invalid ticketId")
+			throw new Exception("invalid ticketId");
 			this.ticketId=ticketId;
 		if(carparkId == null)
-			throw new Exception("invalid carparkId")
+			throw new Exception("invalid carparkId");
 			this.carparkId = carparkId;
 		if(startValidPeriod<= 0)
-			throw new Exception("invalid Start Date")
+			throw new Exception("invalid Start Date");
 			this.startValidPeriod = startValidPeriod;
 		if(endValidPeriod<= startValidPeriod)
-			throw new Exception("invalid End Date")
+			throw new Exception("invalid End Date");
 			this.endValidPeriod = endValidPeriod;
 		
 		usages = new ArrayList<IUsageRecord>();
@@ -73,7 +73,7 @@ public class SeasonTicket implements ISeasonTicket {
 	public void recordUsage(IUsageRecord record) throws Exception{
 		currentUsage = record;
 		if(currentUsage==null)
-			throw new Exception("invalid user record")
+			throw new Exception("invalid user record");
 		if (!usages.contains(currentUsage) ) {
 			usages.add(currentUsage);
 		}
