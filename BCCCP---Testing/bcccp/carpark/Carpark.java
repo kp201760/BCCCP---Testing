@@ -35,6 +35,10 @@ public class Carpark implements ICarpark {
 	public void register(ICarparkObserver observer) {
 		if (!observers.contains(observer)) {
 			observers.add(observer);
+			if(observer==capacity)
+			{
+				observer.notifyCarparkEvent();
+			}
 		}
 	}
 
