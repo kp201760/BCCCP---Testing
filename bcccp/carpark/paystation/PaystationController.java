@@ -123,7 +123,7 @@ public class PaystationController
 	
 	@Override
 	public void ticketTaken() {
-		if (state_ == STATE.IDLE) {
+		if (state_ == STATE.IDLE || state_ == STATE.PAID) {
 			ui_.beep();
 			log("ticketTaken: called while in incorrect state");				
 		}
