@@ -110,8 +110,7 @@ public class PaystationController
 			long paidTime = adhocTicket_.getPaidDateTime();
 			float charge = adhocTicket_.getCharge();
 			String barcode = adhocTicket_.getBarcode();
-			
-			ui_.printTicket(carparkId, ticketNo, entryTime, paidTime, charge, barcode);
+			System.out.println(carparkId, ticketNo, entryTime, paidTime, charge, barcode);
 			setState(STATE.PAID);
 		}
 		else {
