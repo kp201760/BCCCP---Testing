@@ -21,9 +21,11 @@ public class PaystationController
 
 	public PaystationController(ICarpark carpark, IPaystationUI ui) throws Exception {
 		if(carpark == null)
-			throw Exception("invalid value")
+			throw Exception("invalid value");
 			this.carpark_ = carpark;
-		this.ui_ = ui;
+		if (ui == null)
+			throw Exception(invalid ui);
+		    this.ui_ = ui;
 		
 		ui.registerController(this);		
 		setState(STATE.IDLE);		
