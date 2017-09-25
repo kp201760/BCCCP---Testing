@@ -19,9 +19,10 @@ public class PaystationController
 	
 	
 
-	public PaystationController(ICarpark carpark, IPaystationUI ui) {
-		
-		this.carpark_ = carpark;
+	public PaystationController(ICarpark carpark, IPaystationUI ui) throws Exception {
+		if(carpark == null)
+			throw Exception("invalid value")
+			this.carpark_ = carpark;
 		this.ui_ = ui;
 		
 		ui.registerController(this);		
