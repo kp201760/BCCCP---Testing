@@ -14,8 +14,10 @@ public class AdhocTicketDAO  implements IAdhocTicketDAO  {
 
 	
 	
-	public AdhocTicketDAO(IAdhocTicketFactory adhocTicketFactory) {
-		this.adhocTicketFactory_ = adhocTicketFactory;
+	public AdhocTicketDAO(IAdhocTicketFactory adhocTicketFactory_) throws Exception {
+		if (adhocTicketFactory_ == null)
+			throw Exception("invalid ticket factory");
+			this.adhocTicketFactory_ = adhocTicketFactory;
 		currentTickets = new HashMap<>();		
 	}
 
